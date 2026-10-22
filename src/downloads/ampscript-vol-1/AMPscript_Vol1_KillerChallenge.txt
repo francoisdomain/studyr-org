@@ -1,0 +1,55 @@
+<style>
+  td {
+  border: 1px black solid;
+  }
+</style>
+<h2>
+  Full List of Reservations
+</h2>
+%%[
+Set @allReservations = LookupOrderedRows('reservations',0,'contactId, filmID','tickets',1)
+Set @reservationsCount = RowCount(@allReservations)
+If @reservationsCount > 0 Then
+]%%
+<table>
+  <tr>
+    <th>Contact</th>
+    <th>Film</th>
+    <th>Tickets</th>
+  </tr>
+%%[
+   For @i = 1 To @reservationsCount Do
+      Set @reservation = row(@allReservations, @i)
+      Set @contactID = Field(@reservation, 'contactID')
+      Set @contactFullName = ProperCase(Concat(Lookup('contacts','firstName','ID',@contactID)," ",Lookup('contacts','lastName','ID',@contactID)))
+      Set @filmID = Field(@reservation, 'filmID')
+      Set @filmTitle = Concat(Lookup('films','title','ID',@filmID)," ",Lookup('films','subtitle','ID',@filmID))
+      Set @tickets = Field(@reservation, 'tickets')
+      Set @message = ""
+         If @i == 1 and @reservationsCount == 1 Then
+            Set @message = "first and unique row"
+            Set @moreRows = 'FALSE'
+         ElseIf @i > 0 and Add(@i,1) <= @reservationsCount Then
+            Set @nextRow = row(@allReservations, Add(@i,1))
+            Set @nextFilmId = Field(@nextRow,'filmID')
+            Set @nextContactId = Field(@nextRow,'contactID')
+            Set @moreRows = IIF(@filmID==@nextfilmID And @contactId == @nextContactID,'TRUE','FALSE')
+         ElseIf @i == @reservationsCount Then
+            Set @moreRows = 'FALSE'
+         EndIf
+      Set @totalTickets = Add(IIF(EMPTY(@totalTickets),0,@totalTickets),@tickets)
+ ]%%
+   
+%%[
+         If @moreRows == 'FALSE' Then]%%
+            <tr>
+              <td>%%=v(@contactFullName)=%%</td>
+              <td>%%=v(@filmTitle)=%%</td>
+              <td>%%=v(@totalTickets)=%%</td>
+            </tr>
+%%[
+           Set @totalTickets = 0
+        EndIf
+       Set @moreRows = ""
+   next @i
+]%%

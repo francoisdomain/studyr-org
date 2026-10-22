@@ -1,0 +1,18 @@
+{#- Book cover. Uses the real cover image when `cover` is set; otherwise draws a
+    typographic placeholder in the series colour, so a new book looks finished
+    before its artwork exists. Expects `book` (a collection item) in scope. -#}
+{%- set b = book.data -%}
+{%- if b.cover -%}
+<img class="cover-img" src="{{ b.cover }}" alt="{{ b.fullTitle }}, Vol.{{ b.volume }} book cover" width="650" height="746" loading="{{ coverLoading or 'lazy' }}">
+{%- else -%}
+<div class="cover-placeholder cover--{{ b.series | lower }}" role="img" aria-label="{{ b.fullTitle }}, Vol.{{ b.volume }} (cover coming soon)">
+  <div class="cover-placeholder__book">
+    <div class="cover-placeholder__text">
+      <span class="cover-placeholder__series">{{ b.series }}</span>
+      <span class="cover-placeholder__platform">for {{ b.platform }} (Vol.{{ b.volume }})</span>
+      {%- if b.level %}<span class="cover-placeholder__level">{{ b.level }}.</span>{% endif %}
+    </div>
+    <span class="cover-placeholder__brand">StudyR.ORG</span>
+  </div>
+</div>
+{%- endif -%}

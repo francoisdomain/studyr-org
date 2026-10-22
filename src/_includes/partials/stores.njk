@@ -1,0 +1,16 @@
+{#- Amazon buttons generated from one ASIN. The first button is swapped to the
+    visitor's local store by main.js (falls back to amazon.com). -#}
+{%- set asin = book.data.asin -%}
+<div class="buttons buttons--center">
+  <a class="button button--primary" href="https://www.amazon.com/dp/{{ asin }}" target="_blank" rel="noopener"
+     data-local-store data-asin="{{ asin }}" data-stores='{{ site.amazonStores | json }}'>Order on Amazon</a>
+</div>
+<p class="center small" data-local-store-note hidden></p>
+<details class="stores">
+  <summary>Choose another Amazon store</summary>
+  <div class="buttons buttons--center store-grid">
+    {%- for s in site.amazonStores %}
+    <a class="button button--outline" href="https://www.{{ s.domain }}/dp/{{ asin }}" target="_blank" rel="noopener">{{ s.label }}</a>
+    {%- endfor %}
+  </div>
+</details>

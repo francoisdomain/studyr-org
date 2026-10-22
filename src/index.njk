@@ -1,0 +1,79 @@
+---
+layout: layouts/base.njk
+title: Home
+---
+{%- set upcoming = collections.books | nextRelease -%}
+{%- set available = collections.books | withStatus("available") -%}
+
+<section class="hero container-wide">
+  <h1>Marketeers can code too</h1>
+</section>
+
+<section class="container">
+  <h3 class="hero__sub">Learn how to code like a pro in simple steps.</h3>
+  <hr class="separator">
+</section>
+
+{%- if upcoming %}
+{%- set book = upcoming %}
+<section class="feature feature--upcoming container-wide">
+  <div class="feature__cover"><a href="{{ book.url }}" tabindex="-1" aria-hidden="true">{% include "partials/cover.njk" %}</a></div>
+  <div class="feature__body">
+    <p class="badge badge--coming-soon">New · {{ book.data.releaseDate | longDate }}</p>
+    <h2><a href="{{ book.url }}">{{ book.data.fullTitle }}</a></h2>
+    <p>{{ book.data.tagline }}</p>
+    <div class="buttons"><a class="button" href="{{ book.url }}">Find out more</a></div>
+  </div>
+</section>
+{%- endif %}
+
+{%- for book in available %}
+<section class="feature container">
+  <h2><a href="{{ book.url }}">{{ book.data.series }} Vol.{{ book.data.volume }}</a></h2>
+  <p>{{ book.data.tagline }}</p>
+  <div class="buttons">
+    <a class="button" href="https://www.amazon.com/dp/{{ book.data.asin }}" target="_blank" rel="noopener"
+       data-local-store data-asin="{{ book.data.asin }}" data-stores='{{ site.amazonStores | json }}'>Order now</a>
+  </div>
+  {%- if book.data.coverWide %}
+  <a href="{{ book.url }}">
+    <img src="{{ book.data.coverWide }}" width="1024" height="650" alt="{{ book.data.fullTitle }}, Vol.{{ book.data.volume }} book cover">
+  </a>
+  {%- endif %}
+  <div class="buttons buttons--center">
+    <a class="button" href="{{ book.url }}#buy">Order {{ book.data.series }} Vol{{ book.data.volume }} on Amazon</a>
+  </div>
+</section>
+{%- endfor %}
+
+<section class="section container">
+  <h2>The Method</h2>
+  <p>The StudyR method has been developed to allow code novices to learn new skills quickly and efficiently.</p>
+
+  <h5>To optimise learning, the method is structured around:</h5>
+  <ul>
+    <li>New requirements coming in from your team,</li>
+    <li>Introduction of key concepts necessary to fulfil requirements,</li>
+    <li>Examples and use cases,</li>
+    <li>Final challenge: now that you have the knowledge, you can complete the task.</li>
+  </ul>
+
+  <h5>Choose your own adventure!</h5>
+  <p>When it comes to completing the challenge, you can pick and chose how you would like to go through it:</p>
+  <ul>
+    <li>If you feel really confident with the new concept, just get on with it and complete the challenge on your own.</li>
+    <li>If you need a bit of guidance, then follow the HELP section.</li>
+    <li>And if you’re really stuck, the solution is documented with plenty of comments to help you understand what you missed.</li>
+  </ul>
+</section>
+
+<section class="section container-wide">
+  <h2>The books</h2>
+  <div class="book-grid">
+    {%- for book in collections.books %}{% include "partials/book-card.njk" %}{% endfor %}
+  </div>
+</section>
+
+<section class="cta container-wide">
+  <h2>Excited about learning? We are!</h2>
+</section>

@@ -1,0 +1,25 @@
+---
+# Old WordPress URLs → new locations (list in src/_data/redirects.json).
+# GitHub Pages has no server-side redirects, so each old URL gets a tiny page
+# that forwards instantly and tells search engines where the content moved.
+pagination:
+  data: redirects
+  size: 1
+  alias: r
+permalink: "{{ r.from }}"
+eleventyExcludeFromCollections: true
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Moved – studyR</title>
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="{{ r.to | absoluteUrl(site.url) }}">
+  <meta http-equiv="refresh" content="0; url={{ r.to }}">
+  <script>location.replace({{ r.to | json | safe }});</script>
+</head>
+<body>
+  <p>This page has moved to <a href="{{ r.to }}">{{ r.to | absoluteUrl(site.url) }}</a>.</p>
+</body>
+</html>

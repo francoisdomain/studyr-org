@@ -1,0 +1,15 @@
+---
+layout: layouts/base.njk
+title: Bonus Challenges
+description: Exchange with fellow marketeers on the studyR Bonus Challenges.
+permalink: /bonus-challenges/
+---
+<section class="section container">
+  <h1>Bonus Challenges</h1>
+  <p>Exchange with fellow marketeers on the Bonus Challenges!</p>
+  <div class="buttons">
+    {%- for book in collections.books | withField("bonusChallenges") %}
+    <a class="button" href="{{ book.url }}bonus-challenges/">{{ book.data.series }} vol.{{ book.data.volume }}</a>
+    {%- endfor %}
+  </div>
+</section>

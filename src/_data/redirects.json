@@ -1,0 +1,7 @@
+[
+  { "from": "/ampscript-vol-1-2/",               "to": "/downloads/" },
+  { "from": "/ampscript-vol-1-help/",             "to": "/ampscript-vol-1/help/" },
+  { "from": "/ampscript-vol-1-bonus-challenges/", "to": "/ampscript-vol-1/bonus-challenges/" },
+  { "from": "/ampscript-vol-1-beta-testers/",     "to": "/ampscript-vol-1/" },
+  { "from": "/2022/12/03/ampscript-vol-1/",       "to": "/ampscript-vol-1/#about" }
+]

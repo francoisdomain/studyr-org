@@ -1,0 +1,115 @@
+---
+layout: layouts/base.njk
+ogType: book
+eleventyComputed:
+  title: "{{ series }} Vol.{{ volume }}"
+  description: "{{ fullTitle }} (Vol.{{ volume }}). {{ tagline }}"
+  ogImage: "{{ coverOg or '/assets/img/favicon.png' }}"
+  jsonLd:
+    "@context": "https://schema.org"
+    "@type": "Book"
+    name: "{{ fullTitle }} (Vol.{{ volume }})"
+    bookFormat: "https://schema.org/Paperback"
+    inLanguage: "en"
+    publisher: "studyR"
+    url: "https://studyr.org{{ page.url }}"
+---
+{#- One template for every book. Which sections appear depends on the book's
+    status and on which fields its Markdown file fills in. -#}
+{%- set book = collections.books | findByUrl(page.url) -%}
+{%- set coverLoading = "eager" -%}
+
+<section class="book-hero container-wide">
+  <div class="book-hero__cover">{% include "partials/cover.njk" %}</div>
+  <div class="book-hero__body">
+    <p class="badge badge--{{ status }}">{{ status | statusLabel }}</p>
+    <h1>{{ series }} <span class="nowrap">Vol.{{ volume }}</span></h1>
+    <p class="book-hero__title">{{ fullTitle }}{% if level %}<br><span class="muted">{{ level }}</span>{% endif %}</p>
+    <p>{{ tagline }}</p>
+
+    {%- if status == "coming-soon" %}
+    <p class="release">
+      {%- if releaseDate %}Release date: <strong><time datetime="{{ releaseDate | isoDate }}">{{ releaseDate | longDate }}</time></strong>
+      {%- else %}Release date to be announced.{% endif %}
+    </p>
+    {%- endif %}
+
+    {%- if status == "available" and asin %}
+    <div class="buttons">
+      <a class="button" href="#buy">Order now</a>
+      {%- if downloads %}<a class="button button--outline" href="#downloads">Downloads</a>{% endif %}
+    </div>
+    {%- endif %}
+
+    {%- if features %}
+    <ul class="features">
+      {%- for f in features %}<li>{{ f }}</li>{% endfor %}
+    </ul>
+    {%- endif %}
+  </div>
+</section>
+
+{%- if content | trim %}
+<section class="section container prose" id="about">
+{{ content | safe }}
+</section>
+{%- endif %}
+
+{%- if status == "available" and asin %}
+<section class="section container center" id="buy">
+  <h2>Search for {{ series }} on Amazon or select your local store</h2>
+  {% include "partials/stores.njk" %}
+</section>
+{%- endif %}
+
+{%- if downloads %}
+<section class="section container" id="downloads">
+  <h2>Downloads</h2>
+  {%- for d in downloads %}
+  <div class="download-part" id="downloads-part-{{ loop.index }}">
+    <h5>{{ d.part }}</h5>
+    <p>Download the file{% if d.files.length > 1 %}s{% endif %} below:</p>
+    <div class="buttons">
+      {%- for f in d.files %}
+      <a class="button" href="{{ f.href }}" download>{{ f.label }}</a>
+      {%- endfor %}
+    </div>
+    {%- for s in d.steps %}<p>{{ s }}</p>{% endfor %}
+    {%- if d.note %}<p class="small">{{ d.note }}</p>{% endif %}
+  </div>
+  {%- if not loop.last %}<hr class="separator">{% endif %}
+  {%- endfor %}
+</section>
+{%- endif %}
+
+{%- if killerChallenge or bonusChallenges %}
+<section class="section container" id="challenges">
+  <h2>Challenges</h2>
+  <div class="challenge-grid">
+    {%- if killerChallenge %}
+    <div class="challenge">
+      <h3>Killer Challenge</h3>
+      <p>The final task of the course. The requirements are in the printed book. Stuck? Get help, step by step, then the commented solution.</p>
+      <a class="button" href="{{ page.url }}help/">Help and solution</a>
+    </div>
+    {%- endif %}
+    {%- if bonusChallenges %}
+    <div class="challenge">
+      <h3>Bonus Challenges</h3>
+      <p>Exchange with fellow marketeers: share how you solved the challenges, or new ones of your own.</p>
+      <a class="button" href="{{ page.url }}bonus-challenges/">Join the discussion</a>
+    </div>
+    {%- endif %}
+  </div>
+</section>
+{%- endif %}
+
+{%- set siblings = collections.books | sameSeries(series, page.url) %}
+{%- if siblings | length %}
+<section class="section container-wide">
+  <h2>More in the {{ series }} series</h2>
+  <div class="book-grid">
+    {%- for book in siblings %}{% include "partials/book-card.njk" %}{% endfor %}
+  </div>
+</section>
+{%- endif %}

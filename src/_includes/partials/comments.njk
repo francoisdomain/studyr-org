@@ -1,0 +1,28 @@
+{#- Bonus Challenge discussion, powered by giscus (GitHub Discussions).
+    Each book gets its own thread, matched by the term below.
+    Shows a placeholder until `site.comments.categoryId` is filled in (see README). -#}
+{%- set c = site.comments -%}
+<section class="comments" id="discussion">
+  <h2>Share your solutions</h2>
+  {%- if c.repoId and c.categoryId %}
+  <p class="small">Comments use GitHub Discussions, so you'll need a free GitHub account to post.</p>
+  <script src="https://giscus.app/client.js"
+          data-repo="{{ c.repo }}"
+          data-repo-id="{{ c.repoId }}"
+          data-category="{{ c.category }}"
+          data-category-id="{{ c.categoryId }}"
+          data-mapping="specific"
+          data-term="{{ book.data.series }} Vol.{{ book.data.volume }} – Bonus Challenges"
+          data-strict="1"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="light"
+          data-lang="en"
+          data-loading="lazy"
+          crossorigin="anonymous"
+          async></script>
+  {%- else %}
+  <p class="notice">The discussion thread for these challenges opens soon.</p>
+  {%- endif %}
+</section>
