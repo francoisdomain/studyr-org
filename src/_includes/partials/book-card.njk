@@ -1,0 +1,9 @@
+{%- set b = book.data -%}
+<article class="book-card">
+  <a class="book-card__cover" href="{{ book.url }}" tabindex="-1" aria-hidden="true">{% include "partials/cover.njk" %}</a>
+  <div class="book-card__body">
+    <p class="badge badge--{{ b.status }}">{{ b.status | statusLabel }}{% if b.status == "coming-soon" and b.releaseDate %} · {{ b.releaseDate | longDate }}{% endif %}</p>
+    <h3 class="book-card__title"><a href="{{ book.url }}">{{ b.series }} Vol.{{ b.volume }}</a></h3>
+    <p class="book-card__platform">{{ b.platform }}</p>
+  </div>
+</article>

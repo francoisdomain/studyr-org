@@ -1,0 +1,30 @@
+{
+  "name": "studyR",
+  "url": "https://studyr.org",
+  "tagline": "Learn the basics of coding on the job",
+  "description": "Learn the basics of coding on the job.",
+  "locale": "en_US",
+
+  "amazonStores": [
+    { "label": "amazon.com",    "domain": "amazon.com",    "regions": ["US"] },
+    { "label": "amazon.co.uk",  "domain": "amazon.co.uk",  "regions": ["GB", "IE"] },
+    { "label": "amazon.ca",     "domain": "amazon.ca",     "regions": ["CA"] },
+    { "label": "amazon.com.au", "domain": "amazon.com.au", "regions": ["AU", "NZ"] },
+    { "label": "amazon.com.br", "domain": "amazon.com.br", "regions": ["BR"] },
+    { "label": "amazon.fr",     "domain": "amazon.fr",     "regions": ["FR", "BE", "LU", "MC"] },
+    { "label": "amazon.de",     "domain": "amazon.de",     "regions": ["DE", "AT", "CH"] },
+    { "label": "amazon.it",     "domain": "amazon.it",     "regions": ["IT"] },
+    { "label": "amazon.es",     "domain": "amazon.es",     "regions": ["ES"] },
+    { "label": "amazon.nl",     "domain": "amazon.nl",     "regions": ["NL"] },
+    { "label": "amazon.se",     "domain": "amazon.se",     "regions": ["SE"] },
+    { "label": "amazon.co.jp",  "domain": "amazon.co.jp",  "regions": ["JP"] }
+  ],
+
+  "comments": {
+    "_help": "Bonus Challenge comments use giscus (GitHub Discussions). Fill in categoryId after enabling Discussions — see README.",
+    "repo": "francoisdomain/studyr-org",
+    "repoId": "R_kgDOVTF1oA",
+    "category": "Bonus Challenges",
+    "categoryId": ""
+  }
+}

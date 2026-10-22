@@ -1,0 +1,32 @@
+---
+# One "Help & solution" page per book that has a killerChallenge → /<book>/help/
+layout: layouts/base.njk
+pagination:
+  data: collections.booksWithKillerChallenge
+  size: 1
+  alias: book
+permalink: "{{ book.url }}help/"
+eleventyComputed:
+  title: "{{ book.data.series }} Vol.{{ book.data.volume }} Help & solution"
+  description: "Help and solution for the {{ book.data.series }} Vol.{{ book.data.volume }} Killer Challenge."
+---
+{%- set kc = book.data.killerChallenge -%}
+<section class="section container">
+  <p class="breadcrumb"><a href="{{ book.url }}">{{ book.data.series }} Vol.{{ book.data.volume }}</a> / <a href="/killer-challenges/">Killer Challenges</a></p>
+  <h1>{{ book.data.series }} Vol.{{ book.data.volume }} Help &amp; solution</h1>
+
+  <h3>The Killer Challenge was:</h3>
+  <h4>{{ kc.story }}</h4>
+  {%- for p in kc.brief %}<p>{{ p }}</p>{% endfor %}
+
+  <h4>How we approached the challenge:</h4>
+  <ul>
+    {%- for step in kc.approach %}<li>{{ step }}</li>{% endfor %}
+  </ul>
+
+  <h4>Still stuck?</h4>
+  <p>Download our solution to this challenge by clicking the button below:</p>
+  <div class="buttons">
+    <a class="button" href="{{ kc.solution }}" download>Solution</a>
+  </div>
+</section>

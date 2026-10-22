@@ -1,0 +1,28 @@
+---
+layout: layouts/base.njk
+title: Downloads
+description: Data files for the exercises in each studyR book.
+permalink: /downloads/
+---
+{%- set withDownloads = collections.books | withField("downloads") -%}
+{%- set upcoming = collections.books | withStatus("coming-soon") -%}
+<section class="section container">
+  <h1>Downloads</h1>
+  <p>The data files you need for the exercises in each book. No account needed: click a file to download it.</p>
+
+  {%- for book in withDownloads %}
+  <h3>{{ book.data.series }} Vol.{{ book.data.volume }} &ndash; Downloads</h3>
+  <ul>
+    {%- for d in book.data.downloads %}
+    <li><a href="{{ book.url }}#downloads-part-{{ loop.index }}">{{ d.part }}</a>:
+      {% for f in d.files %}<a href="{{ f.href }}" download>{{ f.label }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</li>
+    {%- endfor %}
+  </ul>
+  <div class="buttons"><a class="button" href="{{ book.url }}#downloads">Import instructions</a></div>
+  <hr class="separator">
+  {%- endfor %}
+
+  {%- for book in upcoming %}
+  <h3>{{ book.data.series }} Vol.{{ book.data.volume }} &ndash; Coming Soon</h3>
+  {%- endfor %}
+</section>

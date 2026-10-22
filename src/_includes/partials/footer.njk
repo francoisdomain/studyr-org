@@ -1,0 +1,16 @@
+<footer class="site-footer">
+  <div class="container-wide site-footer__inner">
+    <div>
+      <p class="site-title"><a href="/">{{ site.name }}</a></p>
+      <p class="site-tagline">{{ site.tagline }}</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="/books/">All books</a></li>
+      <li><a href="/downloads/">Downloads</a></li>
+      <li><a href="/killer-challenges/">Killer Challenges</a></li>
+      <li><a href="/bonus-challenges/">Bonus Challenges</a></li>
+    </ul>
+    <small>&copy; <span data-year>{{ build.year }}</span> {{ site.name }}</small>
+  </div>
+</footer>
+<script>document.querySelectorAll('[data-year]').forEach(function(e){e.textContent=new Date().getFullYear()});</script>

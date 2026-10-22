@@ -1,0 +1,43 @@
+{#- Menu is generated from src/books/ — adding a book adds it here automatically. -#}
+{%- set url = page.url -%}
+<header class="site-header">
+  <div class="container-wide site-header__inner">
+    <div>
+      <p class="site-title"><a href="/">{{ site.name }}</a></p>
+      <p class="site-tagline">{{ site.tagline }}</p>
+    </div>
+    <nav class="nav" aria-label="Main">
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Open menu"></button>
+      <ul class="nav__list">
+        <li class="nav__item"><a class="nav__link" href="/"{% if url == "/" %} aria-current="page"{% endif %}>Home</a></li>
+
+        <li class="nav__item">
+          <button class="nav__parent" type="button" aria-expanded="false" aria-controls="submenu-books">Books</button>
+          <ul class="nav__submenu nav__submenu--books" id="submenu-books">
+            {%- for group in collections.books | groupBySeries %}
+            <li class="nav__group">
+              <span class="nav__group-label">{{ group.name }}</span>
+              <ul>
+                {%- for book in group.books %}
+                <li><a href="{{ book.url }}"{% if url.startsWith(book.url) %} aria-current="page"{% endif %}>{{ group.name }} Vol.{{ book.data.volume }}{% if book.data.status == "coming-soon" %} <span class="nav__soon">soon</span>{% endif %}</a></li>
+                {%- endfor %}
+              </ul>
+            </li>
+            {%- endfor %}
+            <li class="nav__all"><a href="/books/"{% if url == "/books/" %} aria-current="page"{% endif %}>All books</a></li>
+          </ul>
+        </li>
+
+        <li class="nav__item"><a class="nav__link" href="/downloads/"{% if url == "/downloads/" %} aria-current="page"{% endif %}>Downloads</a></li>
+
+        <li class="nav__item">
+          <button class="nav__parent" type="button" aria-expanded="false" aria-controls="submenu-challenges">Challenges</button>
+          <ul class="nav__submenu" id="submenu-challenges">
+            <li><a href="/killer-challenges/"{% if url == "/killer-challenges/" or url.endsWith("/help/") %} aria-current="page"{% endif %}>Killer Challenges</a></li>
+            <li><a href="/bonus-challenges/"{% if url.endsWith("bonus-challenges/") %} aria-current="page"{% endif %}>Bonus Challenges</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

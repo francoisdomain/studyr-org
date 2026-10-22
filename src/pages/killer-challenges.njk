@@ -1,0 +1,18 @@
+---
+layout: layouts/base.njk
+title: Killer Challenges
+description: Killer Challenges are the final task at the end of each studyR course.
+permalink: /killer-challenges/
+---
+<section class="section container">
+  <h1>Killer Challenges</h1>
+  <p>Killer Challenges are the last task to be taken on by the learner at the end of the course. Killer Challenges use most concepts introduced during the course but also call for some more personal research, and a lot of logic.</p>
+  <p>The requirements for the Killer Challenges are only available in the printed version of the StudyR.org methods.</p>
+
+  {%- for book in collections.books | withField("killerChallenge") %}
+  <h3>{{ book.data.series }} Vol.{{ book.data.volume }}</h3>
+  <div class="buttons">
+    <a class="button" href="{{ book.url }}help/">Help and solution</a>
+  </div>
+  {%- endfor %}
+</section>

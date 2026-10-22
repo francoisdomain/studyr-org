@@ -1,0 +1,13 @@
+ID,title,subtitle,genre,year,rating,startTime,runTime,showing,roomCapacity,availability,lastReservationDate
+F011,The Lord of the Rings,The Fellowship of the Ring,Fantasy,2001,8.80,7/13/2023 8:30:00 PM,160,True,250,17,
+F012,Schindler's List,,History,1993,8.90,7/12/2023 6:00:00 PM,135,False,120,46,
+F034,The Dark Knight,,Action,2008,9.00,7/12/2023 8:30:00 PM,122,True,120,99,
+F052,Pulp Fiction,,Crime,1994,8.80,7/11/2023 10:30:00 PM,98,True,200,0,
+F061,"The Good, the Bad and the Ugly",,Adventure,1966,8.80,7/13/2023 6:00:00 PM,130,False,120,54,
+F066,Fight Club,,Drama,1999,8.70,7/11/2023 8:30:00 PM,125,True,200,123,
+F067,Forrest Gump,,Drama,1994,8.80,7/11/2023 9:00:00 PM,125,True,250,46,
+F068,The Lord of the Rings,The Return of the King,Fantasy,2003,8.90,7/13/2023 9:00:00 PM,158,True,120,99,
+F079,The Godfather,Part II,Crime,1974,9.00,7/12/2023 9:00:00 PM,140,True,120,0,
+F080,The Shawshank Redemption,,Drama,1994,9.20,7/13/2023 10:30:00 PM,135,True,200,188,
+F099,The Godfather,Part I,Crime,1972,9.20,7/12/2023 10:30:00 PM,128,True,120,2,
+F120,12 Angry Men,,Crime,1957,9.00,7/11/2023 6:00:00 PM,112,True,200,456,

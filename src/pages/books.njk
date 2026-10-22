@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+title: All books
+description: The studyR books, by series. Learn to code for Salesforce Marketing Cloud and Marketing Cloud Next.
+permalink: /books/
+---
+<section class="section container-wide">
+  <h1>All books</h1>
+  {%- for group in collections.books | groupBySeries %}
+  <div class="series" id="{{ group.name | slugify }}">
+    <h2>{{ group.name }} <span class="muted series__platform">for {{ group.platform }}</span></h2>
+    <div class="book-grid">
+      {%- for book in group.books %}{% include "partials/book-card.njk" %}{% endfor %}
+    </div>
+  </div>
+  {%- endfor %}
+</section>

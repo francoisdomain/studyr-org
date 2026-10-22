@@ -1,0 +1,7 @@
+{
+  "layout": "layouts/book.njk",
+  "permalink": "/{{ page.fileSlug }}/",
+  "status": "coming-soon",
+  "betaTesters": false,
+  "bonusChallenges": false
+}
